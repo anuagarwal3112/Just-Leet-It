@@ -6,13 +6,12 @@ public:
         for (end = 0; end < nums.size(); end++) {
             
             // If we reached a zero, increase the zero counter.
-            if (!nums[end])
-                zeros++;
+            if (nums[end] == 0) zeros++;
             
             // If the number of zeros is more than k, we finished with this subarray.
             // Now we can save the length and continue looking if we find a better one.
             while (zeros > k) {
-                if (!nums[start]) zeros--;
+                if (nums[start] == 0) zeros--;
                 start++;
             } 
             
