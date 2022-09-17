@@ -1,3 +1,4 @@
+// https://leetcode.com/problems/palindrome-pairs/discuss/2585633/C%2B%2B-or-BruteHashmapTrie-TLE-Fixed
 struct TrieNode {
     TrieNode *next[26] = {};
     int index = -1;
