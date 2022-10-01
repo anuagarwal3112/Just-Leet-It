@@ -19,14 +19,16 @@ public:
         while(!s1.empty()){
             root = s1.top();
             s1.pop();
-            s2.push(root);
+            postorder.push_back(root->val);
+           // s2.push(root);
             if(root->left) s1.push(root->left);
             if(root->right) s1.push(root->right);
         }
-        while(!s2.empty()){
-            postorder.push_back(s2.top()->val);
-            s2.pop();
-        }
+       // while(!s2.empty()){
+       //     postorder.push_back(s2.top()->val);
+       //     s2.pop();
+       // }
+        reverse(postorder.begin(), postorder.end());
         return postorder;
     }
 };
