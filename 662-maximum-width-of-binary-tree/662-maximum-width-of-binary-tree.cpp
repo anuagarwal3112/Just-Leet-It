@@ -26,10 +26,8 @@ public:
                 q.pop();
                 if(i==0) first = cur_id;
                 if(i==size-1) last = cur_id;
-                if(node->left)
-                    q.push({node->left, cur_id*2+1});
-                if(node->right)
-                    q.push({node->right, cur_id*2+2});
+                if(node->left) q.push({node->left, cur_id*2+1});
+                if(node->right) q.push({node->right, cur_id*2+2});
             }
             ans = max(ans, last-first+1);
         }
