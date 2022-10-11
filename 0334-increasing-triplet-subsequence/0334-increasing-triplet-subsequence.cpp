@@ -10,17 +10,17 @@ public:
 // 4.if nums[i] >mid it means nums[i] is largest than mid and it is als greater than low
 // so we get nums[i] as high so return true
 
-   bool increasingTriplet(vector<int>& nums) {
-    
-        int n=nums.size();
-        if(n<3)return false;       //if size of array is less than 3 we can't make triplate
-        int low=INT_MAX, mid=INT_MAX;
-        for(int i=0;i<n;i++)
-        {
-            if(nums[i]>mid) return true;
-            else if(nums[i]<low) low=nums[i];
-            else if(nums[i]> low and nums[i]<mid) mid=nums[i];
+        bool increasingTriplet(vector<int>& nums) {
+            int n = nums.size();
+            if(n<3) return false;
+            int low = INT_MAX;
+            int mid = INT_MAX;
+            for(int i=0; i<n; i++){
+                int x = nums[i];
+                if(x>mid) return true;
+                else if(x<low) low = x;
+                else if(x>low && x<mid) mid = x;
+            }
+            return false;;
         }
-        return false;
-    }
 };
