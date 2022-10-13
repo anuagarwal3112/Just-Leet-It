@@ -26,9 +26,8 @@ public:
                     }
                     j++;
                 }
-             cnt+=(i-j+1);
-             
-            }
+                cnt+=(i-j+1);
+             }
         }
         return cnt;
     }
