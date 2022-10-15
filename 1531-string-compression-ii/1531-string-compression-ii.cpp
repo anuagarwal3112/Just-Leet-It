@@ -1,29 +1,33 @@
+int dp[101][27][101][101];
 class Solution {
 public:
-    vector<vector<int>> dp;
-    int find(int n){   // return the compressed length of 'n' similiar char
-        if(n==1) return 1;
-        else if(n>1 && n<10) return 2;
-        else if(n>=10 && n<100) return 3;
-        else return 4;
-    }
-    int dfs(string &s,int in,int k){
-        if(k<0) return INT_MAX;
-        if(in>=s.size() || (s.size()-in)<=k) return 0;
-        if(dp[in][k]!=-1) return dp[in][k];
-        
-        int n = 0, t = 0,i = in;  char ch = s[in];  // n = no. of contigous same char after removing 't' char in-between.
-        int re = dfs(s,in+1,k-1);  // Min length after removing current char from [in+1 to s.size()-1]
-        
-        for(; i<s.size() && t<=k;++i){
-            if(s[i]==ch) n++;
-            else re = min(re,find(n)+dfs(s,i,k-t++)); // check for subseq [i to s.size()]
+    string str;
+    int solve(int i, int prev, int len, int k ){
+        if(k<0)return INT_MAX;
+        if(i>=str.size())return 0;
+        if(dp[i][prev][len][k] != -1)
+        {
+            return dp[i][prev][len][k];
         }
-        if(t<=k) re = min(re,find(n)+dfs(s,i,k-t));
-        return dp[in][k] = re;
+       int del = solve(i+1,prev, len,k-1);
+        int keep=0;
+        if(str[i]-'a'==prev){
+             if(len==1||len==9||len==99)
+             {
+                 keep+=1;
+             }
+            keep = keep + solve(i+1,prev, len+1, k);
+        }
+        else {
+            keep=1+solve(i+1, str[i]-'a', 1, k);
+        }
+        dp[i][prev][len][k] = min(del,keep);
+        return dp[i][prev][len][k];
+        return min(del,keep);
     }
     int getLengthOfOptimalCompression(string s, int k) {
-        dp = vector<vector<int>>(s.size()+1,vector<int>(k+1,-1));
-        return dfs(s,0,k);
+        str=s;
+        memset(dp,-1,sizeof(dp));
+        return solve(0, 26, 0, k);
     }
 };
