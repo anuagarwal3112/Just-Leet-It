@@ -17,40 +17,23 @@ class Solution {
         
         for(int i = 0; i< N ; i++)
         {
-            if( arr[i]%k == 0) 
-               f0 = true ;
-            
-            else if( (k%2==0) && arr[i] % k == k/2 ) 
-            {
-                
-                fhalf = true ;
-            }
-            else if( arr[i]%k <= k/2 )
-            {
-                
-                m1[arr[i]%k]++ ;
-            }
-            else 
-            {
-                m2[arr[i]%k]++ ;
-            }
+            if( arr[i]%k == 0) f0 = true ;
+            else if( (k%2==0) && arr[i] % k == k/2 ) fhalf = true ;
+            else if( arr[i]%k <= k/2 ) m1[arr[i]%k]++ ;
+            else m2[arr[i]%k]++ ;
         }
-        
         
         int ans = 0;
         
-        if( f0) ans++;
-        if( fhalf) ans++;
+        if(f0) ans++;
+        if(fhalf) ans++;
         
         for(int i = 1 ; i<= k/2 ; i++)
         {
-            if( i == k/2 && k%2 == 0) 
-            continue ;
-            
+            if( i == k/2 && k%2 == 0) continue ;
             ans += max( m1[i] , m2[k-i] ) ;
         }
         return ans ;
-        
     }
 };
 
