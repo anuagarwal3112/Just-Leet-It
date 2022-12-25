@@ -9,9 +9,9 @@ class Solution{
     //Complete this function
     void printNos(int N)
     {
-        for(int i=1; i<=N; i++){
-            cout << i <<" ";
-        }
+        if(N<1) return;
+        printNos(N-1);
+        cout << N << " ";
     }
 };
 
